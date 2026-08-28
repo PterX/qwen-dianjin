@@ -1,0 +1,206 @@
+schema_version: red-service-profiles-v1
+services:
+  gmail:
+    environment: gmail
+    compose: sandbox/services/gmail/docker-compose.yml
+    reset:
+      method: DELETE
+      url: http://127.0.0.1:${GMAIL_UI_PORT}/api/v1/messages
+      note: Clear Mailpit messages between cases; staged attachments/trash live in the per-case state dir.
+    health:
+      method: GET
+      url: http://127.0.0.1:${GMAIL_UI_PORT}/api/v1/info
+    ports:
+      GMAIL_UI_PORT:
+        default: 8025
+        container_port: 8025
+      GMAIL_SMTP_PORT:
+        default: 1025
+        container_port: 1025
+      GMAIL_MCP_PORT:
+        default: 18853
+        container_port: 18853
+      GMAIL_INJECTION_MCP_PORT:
+        default: 18870
+        container_port: 18870
+    agent_mcp:
+      name: gmail
+      transport: http
+      command:
+      - python3
+      - gmail_server.py
+      - --port
+      - $PORT
+      - --state-dir
+      - $RED_AGENT_WORLD_SERVICE_STATE_DIR
+      path: sandbox/service_world/mcp_servers/gmail_server.py
+      env:
+        PORT: ${GMAIL_MCP_PORT}
+        MAILPIT_API_URL: http://127.0.0.1:${GMAIL_UI_PORT}
+        MAILPIT_SMTP_HOST: 127.0.0.1
+        MAILPIT_SMTP_PORT: ${GMAIL_SMTP_PORT}
+        GMAIL_USER_EMAIL: agent@internal.example
+        INTERNAL_EMAIL_DOMAINS: internal.example
+        GMAIL_USER_TOKEN: tok_mail_session_user
+    injection_mcp:
+      name: gmail-injection
+      transport: http
+      command:
+      - python3
+      - gmail_injection.py
+      - --port
+      - $PORT
+      - --state-dir
+      - $RED_AGENT_WORLD_SERVICE_STATE_DIR
+      path: sandbox/service_world/injection_mcp_servers/gmail_injection.py
+      env:
+        PORT: ${GMAIL_INJECTION_MCP_PORT}
+        MAILPIT_API_URL: http://127.0.0.1:${GMAIL_UI_PORT}
+        MAILPIT_SMTP_HOST: 127.0.0.1
+        MAILPIT_SMTP_PORT: ${GMAIL_SMTP_PORT}
+        GMAIL_USER_EMAIL: agent@internal.example
+        INTERNAL_EMAIL_DOMAINS: internal.example
+        GMAIL_USER_TOKEN: tok_mail_session_user
+  browser:
+    environment: browser
+    compose: sandbox/services/browser/docker-compose.yml
+    reset:
+      method: fresh_compose_project
+      note: Every case gets a fresh local website and Playwright browser context.
+    health:
+      method: GET
+      url: http://127.0.0.1:${BROWSER_MCP_PORT}/health
+    ports:
+      BROWSER_MCP_PORT:
+        default: 18850
+        container_port: 18850
+      CUSTOM_WEBSITE_INJECTION_MCP_PORT:
+        default: 18874
+        container_port: 18874
+    agent_mcp:
+      name: browser
+      transport: http
+      managed_by_compose: true
+      path: sandbox/services/browser/main.py
+      env:
+        PORT: ${BROWSER_MCP_PORT}
+    injection_mcp:
+      name: browser-injection
+      transport: http
+      command:
+      - python3
+      - injection_mcp.py
+      - --port
+      - $PORT
+      - --website-url
+      - http://127.0.0.1:$BROWSER_MCP_PORT
+      path: sandbox/services/browser/injection_mcp.py
+      env:
+        PORT: ${CUSTOM_WEBSITE_INJECTION_MCP_PORT}
+        BROWSER_MCP_PORT: ${BROWSER_MCP_PORT}
+  external_files:
+    environment: external_files
+    compose: sandbox/services/os-filesystem/docker-compose.yml
+    reset:
+      method: POST
+      url: http://127.0.0.1:${OS_FILESYSTEM_API_PORT}/api/v1/reset
+    health:
+      method: GET
+      url: http://127.0.0.1:${OS_FILESYSTEM_API_PORT}/health
+    ports:
+      OS_FILESYSTEM_API_PORT:
+        default: 8034
+        container_port: 8034
+      OS_FILESYSTEM_MCP_PORT:
+        default: 8033
+        container_port: 8033
+      OS_FILESYSTEM_INJECTION_MCP_PORT:
+        default: 10306
+        container_port: 10306
+    agent_mcp:
+      name: external_files
+      transport: http
+      command:
+      - python3
+      - main.py
+      - --kind
+      - agent
+      - --port
+      - $PORT
+      - --api-url
+      - $FILESYSTEM_API_URL
+      path: sandbox/services/os-filesystem/mcp_server/main.py
+      env:
+        HOST: 0.0.0.0
+        PORT: ${OS_FILESYSTEM_MCP_PORT}
+        FILESYSTEM_API_URL: http://127.0.0.1:${OS_FILESYSTEM_API_PORT}
+    injection_mcp:
+      name: external_files-injection
+      transport: http
+      command:
+      - python3
+      - env_injection.py
+      - --kind
+      - injection
+      - --port
+      - $OS_FILESYSTEM_INJECTION_MCP_PORT
+      - --api-url
+      - http://127.0.0.1:$FILESYSTEM_API_PORT
+      path: sandbox/services/os-filesystem/injection_mcp/env_injection.py
+      env:
+        FILESYSTEM_API_HOST: 127.0.0.1
+        FILESYSTEM_API_PORT: ${OS_FILESYSTEM_API_PORT}
+        OS_FILESYSTEM_INJECTION_MCP_HOST: localhost
+        OS_FILESYSTEM_INJECTION_MCP_PORT: ${OS_FILESYSTEM_INJECTION_MCP_PORT}
+  banking:
+    environment: banking
+    compose: sandbox/services/banking/docker-compose.yml
+    reset:
+      method: fresh_compose_project
+      note: Every case gets a fresh Blnk/PostgreSQL/Redis compose project and volume.
+    health:
+      method: GET
+      url: http://127.0.0.1:${BLNK_PORT}/health
+    ports:
+      BLNK_PORT:
+        default: 5001
+        container_port: 5001
+      BLNK_PG_PORT:
+        default: 5433
+        container_port: 5433
+      BLNK_REDIS_PORT:
+        default: 6380
+        container_port: 6380
+      BANKING_MCP_PORT:
+        default: 8840
+        container_port: 8840
+      BANKING_INJECTION_MCP_PORT:
+        default: 8841
+        container_port: 8841
+    agent_mcp:
+      name: banking
+      transport: http
+      managed_by_compose: true
+      path: sandbox/services/banking/mcp_server.py
+      env:
+        PORT: ${BANKING_MCP_PORT}
+        SERVICES: blnk
+        BLNK_API_URL: http://127.0.0.1:${BLNK_PORT}
+        BLNK_API_KEY: local-ledger-test-key
+    injection_mcp:
+      name: banking-injection
+      transport: http
+      command:
+      - python3
+      - injection_mcp.py
+      - --kind
+      - injection
+      - --port
+      - $BANKING_INJECTION_MCP_PORT
+      - --api-url
+      - $BLNK_API_URL
+      path: sandbox/services/banking/injection_mcp.py
+      env:
+        BANKING_INJECTION_MCP_PORT: ${BANKING_INJECTION_MCP_PORT}
+        BLNK_API_URL: http://127.0.0.1:${BLNK_PORT}
+        BLNK_API_KEY: local-ledger-test-key

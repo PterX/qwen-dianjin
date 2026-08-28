@@ -1,6 +1,6 @@
 import re
 from typing import Dict, List
-import Levenshtein
+from rapidfuzz.distance import Levenshtein
 from apted import APTED, Config
 from apted.helpers import Tree
 from lxml import etree

@@ -1,0 +1,1 @@
+"""External agent platform adapters."""

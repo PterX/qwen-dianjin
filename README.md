@@ -12,6 +12,8 @@
 
 ## 🚀 News 
 
+- **2026.08.25** 🎉 "[FinGuard: Detecting Financial Regulatory Non-Compliance in LLM Interactions](https://arxiv.org/abs/2605.29427)" has been accepted to **Findings of EMNLP 2026**!
+- **2026.08.17** 🎉 [**DianJin-RED**](DianJin-RED/README.md) is released — an action-grounded red-teaming benchmark for complete agent systems, with **1,661 executable cases**, **15 intervention strategies** (user input, agent-platform state, and external tools/data), and isolated service worlds.
 - **2026.05.20** 🎉 [**DianJin-SKILLS (百技图)**](DianJin-SKILLS/README.md) is open-sourced — an AI Agent skill library for finance covering banking, insurance, and securities/asset management: **10 professional roles, 130+ standardized skills**, ready to plug into Agent frameworks.
 - **2026.05.10** 🎉 "[Fin-PRM: A Domain-Specialized Process Reward Model for Financial Reasoning in Large Language Models](https://arxiv.org/abs/2508.15202)" has been accepted by **IJCAI 2026**!
 - **2026.04.07** 🎉 "[Benchmarking Large Vision-Language Models on CFMME: A Comprehensive Chinese Financial Multimodal Evaluation Dataset](https://arxiv.org/abs/2605.29462)" has been accepted by **ACL 2026** main conference!
@@ -48,6 +50,13 @@ This repository serves as the open-source hub for our financial AI research. The
     <tr>
         <th>DianJin-SKILLS<br/>(百技图)</th>
         <td><a href="DianJin-SKILLS/README.md">DianJin-SKILLS</a></td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+    </tr>
+    <tr>
+        <th>DianJin-RED</th>
+        <td><a href="DianJin-RED/README.md">DianJin-RED</a></td>
         <td>—</td>
         <td>—</td>
         <td>—</td>
@@ -155,6 +164,13 @@ We are also co-building **FinGDPVal** with industry partners — an evaluation b
 If you find our work helpful, feel free to cite us.
 
 ```
+@inproceedings{finguard,
+  title     = {FinGuard: Detecting Financial Regulatory Non-Compliance in LLM Interactions},
+  author    = {Huaixia Dou and Jie Zhu and Minghao Wu and Shuo Jiang and Junhui Li and Lifan Guo and Feng Chen and Chi Zhang},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2026},
+  year      = {2026}
+}
+
 @inproceedings{csconv,
   title     = {Evaluating, Synthesizing, and Enhancing for Customer Support Conversation},
   author    = {Jie Zhu and Huaixia Dou and Junhui Li and Lifan Guo and Feng Chen and Chi Zhang and Fang Kong},
@@ -215,6 +231,25 @@ If you find our work helpful, feel free to cite us.
   pages     = {5673--5693}
 }
 ```
+
+## 📄 License
+
+Qwen DianJin is developed by Alibaba Cloud. Original code and documentation
+in this repository are Copyright (c) 2026, Alibaba Cloud and its affiliates,
+and are licensed under the [MIT License](LICENSE), except where a file or
+subdirectory states otherwise.
+
+This repository contains third-party source code and separately licensed
+data. Existing file-level and component-level copyright and license notices
+must be retained. In particular, parts of DianJin-PRM and DianJin-OCR-R1 are
+derived from Apache-2.0 projects, while DianJin-RED benchmark data is subject
+to [CC BY-NC 4.0 and applicable upstream terms](DianJin-RED/DATA_LICENSE.md).
+The root MIT License does not override those terms. See [NOTICE](NOTICE) for
+details.
+
+Contributions are welcome under the policies in
+[CONTRIBUTING.md](CONTRIBUTING.md) and the
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## 🤝 Contact Us
 

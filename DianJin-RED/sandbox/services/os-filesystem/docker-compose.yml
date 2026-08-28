@@ -1,0 +1,25 @@
+services:
+  os-filesystem:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: red-service-os-filesystem:local
+    ports:
+      - "${OS_FILESYSTEM_API_PORT:-8034}:${OS_FILESYSTEM_API_PORT:-8034}"
+    environment:
+      API_PORT: "${OS_FILESYSTEM_API_PORT:-8034}"
+      SERVICE_STATE_DIR: /state
+      FILESYSTEM_ROOT: /srv/external-files
+    volumes:
+      - "${RED_AGENT_WORLD_SERVICE_STATE_DIR:-./state}:/state"
+      - "${RED_AGENT_WORLD_SERVICE_STATE_DIR:-./state}/external_files:/srv/external-files"
+    healthcheck:
+      test: ["CMD-SHELL", "python3 - <<'PY'\nimport urllib.request\nurllib.request.urlopen('http://127.0.0.1:${OS_FILESYSTEM_API_PORT:-8034}/health', timeout=3)\nPY"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"

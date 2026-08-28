@@ -1,0 +1,28 @@
+services:
+  mailpit:
+    image: ${MAILPIT_IMAGE:-axllent/mailpit:v1.30.0}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${GMAIL_UI_PORT:-8025}:8025"
+      - "127.0.0.1:${GMAIL_SMTP_PORT:-1025}:1025"
+    environment:
+      MP_UI_BIND_ADDR: "0.0.0.0:8025"
+      MP_SMTP_BIND_ADDR: "0.0.0.0:1025"
+      MP_DATABASE: "/data/mailpit.db"
+      MP_MAX_MESSAGES: "5000"
+    volumes:
+      - mailpit_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:8025/api/v1/info"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 3s
+
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+
+volumes:
+  mailpit_data:

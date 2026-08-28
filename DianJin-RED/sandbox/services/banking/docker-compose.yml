@@ -1,0 +1,83 @@
+services:
+  blnk-postgres:
+    image: docker.m.daocloud.io/library/postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: blnk
+      PGPORT: ${BLNK_PG_PORT:-5433}
+    volumes:
+      - blnk_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -p ${BLNK_PG_PORT:-5433}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  blnk-redis:
+    image: docker.m.daocloud.io/library/redis:7.2.4
+    restart: unless-stopped
+    command: ["redis-server", "--port", "${BLNK_REDIS_PORT:-6380}"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "${BLNK_REDIS_PORT:-6380}", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  blnk-server:
+    image: docker.1ms.run/jerryenebeli/blnk:0.14.5
+    restart: unless-stopped
+    ports:
+      - "${BLNK_PORT:-5001}:${BLNK_PORT:-5001}"
+    depends_on:
+      blnk-postgres:
+        condition: service_healthy
+      blnk-redis:
+        condition: service_healthy
+    environment:
+      BLNK_SERVER_PORT: ${BLNK_PORT:-5001}
+      BLNK_DATA_SOURCE_DNS: postgres://postgres:postgres@blnk-postgres:${BLNK_PG_PORT:-5433}/blnk?sslmode=disable
+      BLNK_REDIS_DNS: redis://blnk-redis:${BLNK_REDIS_PORT:-6380}
+      BLNK_SERVER_SECRET_KEY: ${BLNK_SECRET_KEY:-local-ledger-test-key}
+    command: ["sh", "-c", "blnk migrate up && blnk start"]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${BLNK_PORT:-5001}/health || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  banking-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    image: red-service-banking-mcp-canonical:v1
+    pull_policy: never
+    restart: unless-stopped
+    ports:
+      - "${BANKING_MCP_PORT:-8840}:${BANKING_MCP_PORT:-8840}"
+    depends_on:
+      blnk-server:
+        condition: service_healthy
+    environment:
+      PORT: ${BANKING_MCP_PORT:-8840}
+      SERVICES: blnk
+      BLNK_API_URL: http://blnk-server:${BLNK_PORT:-5001}
+      BLNK_API_KEY: ${BLNK_SECRET_KEY:-local-ledger-test-key}
+      RED_AGENT_WORLD_SERVICE_STATE_DIR: /state
+    volumes:
+      - "${RED_AGENT_WORLD_SERVICE_STATE_DIR:-./state}:/state"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:%s/health' % os.environ['PORT'], timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  blnk_postgres_data:
+
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"

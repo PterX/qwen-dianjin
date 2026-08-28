@@ -1,0 +1,25 @@
+global:
+  base_dir: mcp_servers
+  log_dir: logs
+  python_executable: python3
+servers:
+  - name: gmail
+    description: Mail MCP server backed by per-case local state.
+    enabled: true
+    port: 18853
+    environment: gmail
+    transport: http
+    path: gmail_server.py
+    command: ["python3", "gmail_server.py", "--port", "$PORT", "--state-dir", "$RED_AGENT_WORLD_SERVICE_STATE_DIR"]
+    env:
+      PORT: "${GMAIL_MCP_PORT}"
+  - name: external_files
+    description: Filesystem MCP server backed by per-case local state.
+    enabled: true
+    port: 18833
+    environment: external_files
+    transport: http
+    path: os_filesystem_server.py
+    command: ["python3", "os_filesystem_server.py", "--port", "$PORT", "--state-dir", "$RED_AGENT_WORLD_SERVICE_STATE_DIR"]
+    env:
+      PORT: "${OS_FILESYSTEM_MCP_PORT}"

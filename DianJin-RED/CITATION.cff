@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use REDAgentBench, cite the software release and the associated paper when available."
+title: "REDAgentBench (RED-Agent-World)"
+type: software
+version: 0.1.0
+date-released: 2026-08-11
+authors:
+  - name: "REDAgentBench Authors"
+license: MIT

@@ -4,11 +4,11 @@
 > **所属类别**: 代理人/HWP
 
 ## 测试目标
-验证 [insurance-hwp-gap-advisor](/Users/zhangjia/Documents/客户/保险/技能/保险技能/.qoder/skills/insurance-hwp-gap-advisor/SKILL.md) 的触发条件和核心功能是否正常运作。
+验证 [insurance-hwp-gap-advisor](./SKILL.md) 的触发条件和核心功能是否正常运作。
 
 ## 测试数据
 
-测试数据位于 `/Users/zhangjia/Documents/客户/保险/技能/保险技能/test_images/` 和 `/Users/zhangjia/Documents/客户/保险/技能/保险技能/test_data/`：
+测试数据位于 `./test_images/` 和 `./test_data/`：
 - `invoice_sample.png` / `medical_record_sample.png` — 理赔材料（如需上传）
 - `medical_report.png` — 体检报告
 - `customer_renewal.xlsx` — 客户数据

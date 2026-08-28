@@ -1,0 +1,10 @@
+[project]
+name = "os-filesystem-mcp"
+version = "0.1.0"
+description = "External filesystem MCP server for file-store operations"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.4.1",
+]

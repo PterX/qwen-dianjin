@@ -1,0 +1,11 @@
+FROM m.daocloud.io/docker.io/python:3.12-bookworm
+
+WORKDIR /app
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --index-url https://pypi.tuna.tsinghua.edu.cn/simple -r /app/requirements.txt
+
+COPY mcp_server.py /app/mcp_server.py
+COPY red_extensions.py /app/red_extensions.py
+COPY blnk /app/blnk
+
+CMD ["python3", "/app/mcp_server.py"]

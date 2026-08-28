@@ -12,6 +12,8 @@
 
 ## 🚀 最新动态
 
+- **2026.08.25** 🎉 论文《[FinGuard: Detecting Financial Regulatory Non-Compliance in LLM Interactions](https://arxiv.org/abs/2605.29427)》已被 **EMNLP 2026 Findings** 录用！
+- **2026.08.17** 🎉 [**DianJin-RED**](DianJin-RED/README_zh.md) 开源 —— 面向完整 Agent 系统的、以真实副作用为依据的红队安全评测基准，包含 **1,661 条可执行 case**、**15 种干预策略**（用户输入、Agent 平台状态、外部工具/数据）和隔离服务世界。
 - **2026.05.20** 🎉 [**DianJin-SKILLS（百技图）**](DianJin-SKILLS/README.md) 开源 —— 面向金融行业的 AI Agent 技能定义库，覆盖银行、保险、证券/资管三大业态，**10 个专业角色、130+ 个标准化技能**，可直接对接大模型 Agent 框架。
 - **2026.05.10** 🎉 **Fin-PRM** 已被 **IJCAI 2026** 国际会议录用！
 - **2026.04.07** 🎉 《[Benchmarking Large Vision-Language Models on CFMME: A Comprehensive Chinese Financial Multimodal Evaluation Dataset](https://arxiv.org/abs/2605.29462)》已被 **ACL 2026** 主会录用！
@@ -48,6 +50,13 @@
     <tr>
         <th>DianJin-SKILLS<br/>（百技图）</th>
         <td><a href="DianJin-SKILLS/README.md">DianJin-SKILLS</a></td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+    </tr>
+    <tr>
+        <th>DianJin-RED</th>
+        <td><a href="DianJin-RED/README_zh.md">DianJin-RED</a></td>
         <td>—</td>
         <td>—</td>
         <td>—</td>
@@ -155,6 +164,13 @@
 如果我们的工作对你有帮助，欢迎引用。
 
 ```
+@inproceedings{finguard,
+  title     = {FinGuard: Detecting Financial Regulatory Non-Compliance in LLM Interactions},
+  author    = {Huaixia Dou and Jie Zhu and Minghao Wu and Shuo Jiang and Junhui Li and Lifan Guo and Feng Chen and Chi Zhang},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2026},
+  year      = {2026}
+}
+
 @inproceedings{csconv,
   title     = {Evaluating, Synthesizing, and Enhancing for Customer Support Conversation},
   author    = {Jie Zhu and Huaixia Dou and Junhui Li and Lifan Guo and Feng Chen and Chi Zhang and Fang Kong},
@@ -215,6 +231,21 @@
   pages     = {5673--5693}
 }
 ```
+
+## 📄 许可证
+
+Qwen DianJin（通义点金）由阿里云开发。本仓库中的原创代码和文档著作权归
+Alibaba Cloud and its affiliates 所有（Copyright (c) 2026），除文件或子目录另有
+声明外，均按照 [MIT License](LICENSE) 开源。
+
+本仓库同时包含第三方源代码及采用独立许可证的数据，必须保留已有的文件级和
+组件级著作权与许可证声明。其中，DianJin-PRM 和 DianJin-OCR-R1 的部分代码
+源自 Apache-2.0 项目；DianJin-RED Benchmark 数据遵循
+[CC BY-NC 4.0 及适用的上游条款](DianJin-RED/DATA_LICENSE.md)。根目录 MIT
+许可证不会覆盖或替代这些独立条款。完整说明请参阅 [NOTICE](NOTICE)。
+
+欢迎按照 [CONTRIBUTING.md](CONTRIBUTING.md) 和
+[社区行为准则](CODE_OF_CONDUCT.md) 参与贡献。
 
 ## 🤝 联系我们
 

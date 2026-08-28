@@ -1,0 +1,25 @@
+# Private runtime config (contains API keys)
+config/config_local_private.json
+
+# Rollout outputs and scratch data
+results/
+tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+.venv-*/
+venv/
+
+# OS / editor noise
+.DS_Store
+._*
+*.orig
+*.rej
+*.bak
+
+# Logs
+*.log
