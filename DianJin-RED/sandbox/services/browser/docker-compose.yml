@@ -1,0 +1,31 @@
+services:
+  browser-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+      args:
+        PLAYWRIGHT_IMAGE: ${PLAYWRIGHT_IMAGE:-mcr.microsoft.com/playwright/python:v1.56.0-noble}
+    image: red-service-browser-mcp-canonical:v1
+    pull_policy: never
+    restart: unless-stopped
+    ports:
+      - "${BROWSER_MCP_PORT:-18850}:${BROWSER_MCP_PORT:-18850}"
+    environment:
+      PORT: ${BROWSER_MCP_PORT:-18850}
+      CUSTOM_WEBSITE_UI_URL: http://127.0.0.1:${BROWSER_MCP_PORT:-18850}
+      BROWSER_MCP_CONFIG: /state/browser_config.json
+      RED_AGENT_WORLD_SERVICE_STATE_DIR: /state
+    volumes:
+      - "${RED_AGENT_WORLD_SERVICE_STATE_DIR:-./state}:/state"
+      - "./config.json:/app/config.json:ro"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:%s/health' % os.environ['PORT'], timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"

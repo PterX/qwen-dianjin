@@ -1,0 +1,100 @@
+Qwen DianJin
+Copyright (c) 2026, Alibaba Cloud and its affiliates.
+
+Original source code and documentation developed for Qwen DianJin are
+licensed under the MIT License found in the root LICENSE file, except where a
+file or subdirectory states otherwise.
+
+This repository includes third-party source code, separately licensed data,
+and materials whose notices and license terms must be preserved. The root MIT
+License does not replace or override those terms.
+
+==========================================================================
+Bundled or adapted third-party source code
+==========================================================================
+
+VERL
+----
+Locations:
+  DianJin-PRM/src/verl/
+  DianJin-OCR-R1/src/rl/verl/
+Upstream: https://github.com/volcengine/verl
+Copyright: ByteDance Ltd. and/or its affiliates and other contributors
+License: Apache License 2.0
+
+The VERL-derived trees also contain adapted source and file-level attribution
+notices from projects and contributors including Hugging Face, NVIDIA,
+Fairseq, SGLang, vLLM, PRIME, Search-R1, OpenAI, Meta, Microsoft, Amazon,
+Alibaba PAI, the Qwen team, and individual contributors. Those notices remain
+in the corresponding source files and must be retained.
+
+LLaMA-Factory
+-------------
+Location:
+  DianJin-OCR-R1/src/sft/src/llamafactory/
+Upstream: https://github.com/hiyouga/LLaMA-Factory
+Copyright: the LlamaFactory team and other contributors
+License: Apache License 2.0
+
+File-level notices in this tree additionally identify contributions from
+Hugging Face, THUDM, Moonshot AI, LMSYS, EleutherAI, Unsloth, Optuna,
+OpenAccess AI Collective, and individual contributors. Those notices remain
+in the corresponding source files and must be retained.
+
+vLLM-derived compatibility code
+-------------------------------
+Location:
+  DianJin-PRM/src/verl/third_party/vllm/
+Upstream: https://github.com/vllm-project/vllm
+Copyright: the vLLM team, ByteDance Ltd. and/or its affiliates, and other
+contributors
+License: Apache License 2.0
+
+The complete Apache License 2.0 text is available at:
+  LICENSES/Apache-2.0.txt
+  DianJin-OCR-R1/src/rl/LICENSE
+  DianJin-OCR-R1/src/sft/LICENSE
+
+==========================================================================
+Separately licensed components and data
+==========================================================================
+
+DianJin-RED / REDAgentBench
+--------------------------
+Location:
+  DianJin-RED/
+
+Original DianJin-RED software is licensed under its own MIT License:
+  DianJin-RED/LICENSE
+
+Benchmark cases and provenance records are subject to CC BY-NC 4.0 and any
+applicable upstream terms, as described in:
+  DianJin-RED/DATA_LICENSE.md
+  DianJin-RED/DATA_PROVENANCE.csv
+  DianJin-RED/THIRD_PARTY_NOTICES.md
+
+The root MIT License does not grant commercial-use rights to data licensed
+under CC BY-NC 4.0 and does not replace upstream data terms.
+
+Models, datasets, images, papers, checkpoints, and externally hosted assets
+may be subject to additional terms stated in their associated README files,
+model cards, dataset cards, source pages, or accompanying notices.
+
+==========================================================================
+Package dependencies and external services
+==========================================================================
+
+Python packages, container images, command-line tools, models, and services
+referenced by manifests or setup instructions are not relicensed by this
+project. Their respective upstream licenses and service terms apply. Where a
+subproject contains a more specific LICENSE, NOTICE, DATA_LICENSE, or
+THIRD_PARTY_NOTICES file, that more specific notice controls for the relevant
+material.
+
+==========================================================================
+Trademarks
+==========================================================================
+
+Names and marks of Alibaba Cloud, Qwen, third-party projects, and their
+respective owners are not granted under the software licenses described
+above. No trademark rights are conveyed by this NOTICE.

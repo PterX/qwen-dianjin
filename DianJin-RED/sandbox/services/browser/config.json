@@ -1,0 +1,133 @@
+{
+  "url_mappings": [
+    {
+      "original_url": "https://analytics.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/analytics.example"
+    },
+    {
+      "original_url": "https://audit-export.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/audit-export.example"
+    },
+    {
+      "original_url": "https://benefits-intake.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/benefits-intake.example"
+    },
+    {
+      "original_url": "https://billing-portal.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/billing-portal.example"
+    },
+    {
+      "original_url": "https://build-health.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/build-health.example"
+    },
+    {
+      "original_url": "https://callback-lab.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/callback-lab.example"
+    },
+    {
+      "original_url": "https://campaign-tools.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/campaign-tools.example"
+    },
+    {
+      "original_url": "https://campaign-view.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/campaign-view.example"
+    },
+    {
+      "original_url": "https://collections-advice.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/collections-advice.example"
+    },
+    {
+      "original_url": "https://depscan.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/depscan.example"
+    },
+    {
+      "original_url": "https://forms.partner-ops.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/forms.partner-ops.example"
+    },
+    {
+      "original_url": "https://grant-portal.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/grant-portal.example"
+    },
+    {
+      "original_url": "https://hr-portal.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/hr-portal.example"
+    },
+    {
+      "original_url": "https://identity-admin.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/identity-admin.example"
+    },
+    {
+      "original_url": "https://incident-automation.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/incident-automation.example"
+    },
+    {
+      "original_url": "https://integration-status.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/integration-status.example"
+    },
+    {
+      "original_url": "https://model-check.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/model-check.example"
+    },
+    {
+      "original_url": "https://notice-preview.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/notice-preview.example"
+    },
+    {
+      "original_url": "https://partner-api.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/partner-api.example"
+    },
+    {
+      "original_url": "https://portal.partner-ops.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/portal.partner-ops.example"
+    },
+    {
+      "original_url": "https://quote-check.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/quote-check.example"
+    },
+    {
+      "original_url": "https://regulator-view.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/regulator-view.example"
+    },
+    {
+      "original_url": "https://recovery-check.external-integrator.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/recovery-check.external-integrator.example"
+    },
+    {
+      "original_url": "https://security-portal.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/security-portal.example"
+    },
+    {
+      "original_url": "https://settlements.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/settlements.example"
+    },
+    {
+      "original_url": "https://status-grid.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/status-grid.example"
+    },
+    {
+      "original_url": "https://status-guidance.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/status-guidance.example"
+    },
+    {
+      "original_url": "https://vendor-console.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/vendor-console.example"
+    },
+    {
+      "original_url": "https://vendor-ops.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/vendor-ops.example"
+    },
+    {
+      "original_url": "https://webhook-test.example",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/webhook-test.example"
+    },
+    {
+      "original_url": "https://workflow.local",
+      "mapped_url": "${CUSTOM_WEBSITE_UI_URL}/sites/workflow.local"
+    }
+  ],
+  "saved_passwords": [],
+  "saved_credit_cards": [],
+  "pre-logins": [],
+  "browsing_history": {},
+  "include_screenshot_in_snapshot": false
+}

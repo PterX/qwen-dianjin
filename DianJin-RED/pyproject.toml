@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "red-agent-world"
+version = "0.1.0"
+description = "REDAgentBench: sandboxed red-teaming benchmark and execution harness for LLM agents"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp>=3.9",
+    "docker>=6.1",
+    "openai>=1.0",
+    "PyYAML>=6.0",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+analysis = [
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+    "reportlab>=4.0",
+]
+dev = [
+    "pytest>=7.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

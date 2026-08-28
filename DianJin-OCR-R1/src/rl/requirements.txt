@@ -18,7 +18,7 @@ torchdata
 transformers>=4.51.0,<4.53.0
 vllm>=0.8.0
 wandb
-Levenshtein==0.25.1
+rapidfuzz==3.9.7
 apted==1.0.3
 lxml==4.9.1
 tqdm==4.67.1

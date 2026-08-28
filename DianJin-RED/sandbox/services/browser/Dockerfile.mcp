@@ -1,0 +1,11 @@
+ARG PLAYWRIGHT_IMAGE=mcr.microsoft.com/playwright/python:v1.56.0-noble
+FROM ${PLAYWRIGHT_IMAGE}
+
+WORKDIR /app
+RUN pip install --no-cache-dir --index-url https://pypi.org/simple \
+    fastmcp==2.13.1 playwright==1.56.0
+
+COPY main.py /app/main.py
+COPY config.json /app/config.json
+
+CMD ["bash", "-lc", "cp /app/config.json /state/browser_config.json && exec python3 /app/main.py"]

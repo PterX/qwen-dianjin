@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.11",
+    "lastTouchedAt": "2026-03-30T06:43:05.419Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-04T07:13:25.665Z",
+    "lastRunVersion": "2026.2.1",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "evaluateEnabled": true,
+    "attachOnly": true
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "DefaultProvider": {
+        "baseUrl": "https://your-api-endpoint.example.com/v1",
+        "apiKey": "YOUR_PROVIDER_API_KEY",
+        "api": "openai-completions",
+        "authHeader": true,
+        "models": [
+          {
+            "id": "your_model_id",
+            "name": "your_model_name",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 400000,
+            "maxTokens": 128000,
+            "compat": {
+              "maxTokensField": "max_completion_tokens"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "DefaultProvider/your_model_id"
+      },
+      "workspace": "/workspace",
+      "skipBootstrap": true,
+      "skipOptionalBootstrapFiles": [
+        "SOUL.md",
+        "USER.md",
+        "HEARTBEAT.md",
+        "IDENTITY.md"
+      ],
+      "contextInjection": "never",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "cron": {
+    "enabled": false
+  },
+  "web": {
+    "enabled": false
+  },
+  "canvasHost": {
+    "enabled": false
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "controlUi": {
+      "allowedOrigins": [
+        "http://localhost:18789",
+        "http://127.0.0.1:18789"
+      ]
+    },
+    "auth": {
+      "mode": "token",
+      "token": "GENERATED_PER_RUN"
+    },
+    "remote": {
+      "token": "GENERATED_PER_RUN"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  }
+}

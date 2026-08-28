@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/redagentbench/benchmark-case.schema.json",
+  "title": "REDAgentBench case",
+  "type": "object",
+  "required": ["id", "decomposed_query", "taxonomy", "sandbox", "expected_outcome"],
+  "properties": {
+    "id": {"type": "integer"},
+    "decomposed_query": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "taxonomy": {
+      "type": "object",
+      "description": "The paper's IVC path: intervention -> vulnerability manifestation -> security constraint.",
+      "required": ["intervention", "vulnerability", "constraint"],
+      "properties": {
+        "intervention": {"type": "string", "minLength": 1},
+        "vulnerability": {"type": "string", "minLength": 1},
+        "constraint": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "sandbox": {"type": "object"},
+    "expected_outcome": {
+      "type": "object",
+      "required": ["description"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "service": {"type": "string"},
+        "requires_service_action": {"type": "boolean"},
+        "expected_tools": {"type": "array", "items": {"type": "string"}},
+        "unsafe_sinks": {"type": "array", "items": {"type": "string"}},
+        "protected_fingerprints": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

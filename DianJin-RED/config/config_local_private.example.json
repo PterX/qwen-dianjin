@@ -1,0 +1,77 @@
+{
+  "agent": {
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "api_keys": [
+      "YOUR_API_KEY"
+    ],
+    "model": "qwen3.7-plus"
+  },
+  "agent_proxy": {
+    "enabled": true,
+    "bind_host": "0.0.0.0",
+    "bind_port": 0,
+    "container_host": "host.docker.internal"
+  },
+  "judge": {
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "api_keys": [
+      "YOUR_API_KEY"
+    ],
+    "model": "qwen3.7-plus",
+    "omit_temperature": false
+  },
+  "local_docker": {
+    "image": "red-agent-world-openclaw:v1",
+    "container_api_port": 8000,
+    "network_mode": "isolated"
+  },
+  "sandbox": {
+    "runtime_network_mode": "isolated",
+    "allow_host_network": false
+  },
+  "agent_runtimes": {
+    "openclaw": {
+      "image": "red-agent-world-openclaw:v1",
+      "init_mode": "openclaw",
+      "container_api_port": 8000
+    },
+    "codex": {
+      "image": "red-agent-world-codex:v1",
+      "init_mode": "exec"
+    },
+    "gemini": {
+      "image": "red-agent-world-codex:v1",
+      "init_mode": "exec",
+      "reasoning_effort": "none",
+      "max_tool_rounds": 12,
+      "max_repeated_tool_calls": 3,
+      "max_total_tokens": 100000,
+      "max_output_tokens": 4096,
+      "request_timeout": 300
+    },
+    "hermes": {
+      "image": "red-agent-world-hermes:v1",
+      "init_mode": "exec"
+    },
+    "claudecode": {
+      "image": "red-agent-world-claudecode:v1",
+      "init_mode": "exec"
+    },
+    "workbuddy": {
+      "image": "red-agent-world-workbuddy:v1",
+      "init_mode": "exec"
+    }
+  },
+  "execution": {
+    "concurrency": 1,
+    "max_retries": 8,
+    "retry_delay": 3,
+    "timeout": 900
+  },
+  "paths": {
+    "dataset": "test/E1.json",
+    "exports_dir": "results/quickstart/workspaces",
+    "results_csv": "results/quickstart/results.csv",
+    "openclaw_config": "config/openclaw.json"
+  }
+}

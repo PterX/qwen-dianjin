@@ -1,6 +1,6 @@
 import re
 from typing import Dict, List
-import Levenshtein
+from rapidfuzz.distance import Levenshtein
 import re
 
 def normalized_formula(text):

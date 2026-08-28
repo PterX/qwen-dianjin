@@ -4,11 +4,11 @@
 > **所属类别**: 理赔
 
 ## 测试目标
-验证 [insurance-claim-coverage-analysis](/Users/zhangjia/Documents/客户/保险/技能/保险技能/.qoder/skills/insurance-claim-coverage-analysis/SKILL.md) 的触发条件和核心功能是否正常运作。
+验证 [insurance-claim-coverage-analysis](./SKILL.md) 的触发条件和核心功能是否正常运作。
 
 ## 测试数据
 
-测试图片位于 `/Users/zhangjia/Documents/客户/保险/技能/保险技能/test_images/`：
+测试图片位于 `./test_images/`：
 - `invoice_sample.png` — 医疗发票
 - `medical_record_sample.png` — 门诊病历
 - `diagnosis_certificate_sample.png` — 诊断证明

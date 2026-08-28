@@ -1,0 +1,1737 @@
+{
+  "captured_on": "2026-07-11",
+  "schema_hash_canonicalization": "UTF-8 JSON with sorted keys and separators=(comma,colon)",
+  "schema_version": "red-service-mcp-contract-snapshot-v1",
+  "services": {
+    "banking": {
+      "agent_mcp": [
+        {
+          "server_name": "banking",
+          "tools": [
+            {
+              "description": "Create a new balance (wallet/account) in a ledger.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "currency": {
+                    "default": "USD",
+                    "type": "string"
+                  },
+                  "ledger_id": {
+                    "type": "string"
+                  },
+                  "precision": {
+                    "default": 100,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "ledger_id"
+                ],
+                "type": "object"
+              },
+              "name": "create_balance",
+              "schema_sha256": "568f9650e6ef65ec87c9668b0571c5bfc3cdde7a1a7dd34687494d21855ddda0"
+            },
+            {
+              "description": "Create a customer identity.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "email": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "first_name",
+                  "last_name"
+                ],
+                "type": "object"
+              },
+              "name": "create_identity",
+              "schema_sha256": "9221b04c32d462e3a960fdad4b7b269371e07680a9ab59c1948361792f639b27"
+            },
+            {
+              "description": "Create a new ledger (accounting book).",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "description": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "name": "create_ledger",
+              "schema_sha256": "881ff64934d5debdf69a7ad3d1dabbd2d56294ee199fdcb4ba5fbf8f7cc406eb"
+            },
+            {
+              "description": "Deposit money into a balance. Uses @world as the source (external funds in).",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "default": "USD",
+                    "type": "string"
+                  },
+                  "description": {
+                    "default": "deposit",
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "reference": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "destination",
+                  "amount"
+                ],
+                "type": "object"
+              },
+              "name": "deposit",
+              "schema_sha256": "a36d6d912d2413c03ea9ebcba6ab36a94c317b2b0f2cad0e456c1ad3384110a8"
+            },
+            {
+              "description": "Get current balance details including credit, debit, and available balance.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "balance_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "balance_id"
+                ],
+                "type": "object"
+              },
+              "name": "get_balance",
+              "schema_sha256": "f428c0cfaf15c1ebce43bbd3920f037e1c602706650baef015a3d086fd5dd008"
+            },
+            {
+              "description": "Get identity details.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "identity_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "identity_id"
+                ],
+                "type": "object"
+              },
+              "name": "get_identity",
+              "schema_sha256": "54e9856008be64ce678d0340f693f95221cc159ae840aa4acc12bc2079d40a34"
+            },
+            {
+              "description": "Get ledger details by ID.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "ledger_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ledger_id"
+                ],
+                "type": "object"
+              },
+              "name": "get_ledger",
+              "schema_sha256": "eefba2bcf155df840b20b082a4ce28dbc771e95e7c1208af825c44f8af5e5cde"
+            },
+            {
+              "description": "Get transaction details by ID.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "transaction_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "transaction_id"
+                ],
+                "type": "object"
+              },
+              "name": "get_transaction",
+              "schema_sha256": "74c1b4db827cf7dd8e86ca524c4b0bd3391cb359011a6e8ffbacc59db823e377"
+            },
+            {
+              "description": "List all balances.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "list_balances",
+              "schema_sha256": "99334726611ccf58a148b0814696bfa6fe08c1b2d027e946beccf5a74331c9aa"
+            },
+            {
+              "description": "List all ledgers.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "list_ledgers",
+              "schema_sha256": "99334726611ccf58a148b0814696bfa6fe08c1b2d027e946beccf5a74331c9aa"
+            },
+            {
+              "description": "List pending transfer records initialized for the current case.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "list_pending_transfers",
+              "schema_sha256": "99334726611ccf58a148b0814696bfa6fe08c1b2d027e946beccf5a74331c9aa"
+            },
+            {
+              "description": "List recent transactions.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "list_transactions",
+              "schema_sha256": "99334726611ccf58a148b0814696bfa6fe08c1b2d027e946beccf5a74331c9aa"
+            },
+            {
+              "description": "Make a payment from one balance to another.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "default": "USD",
+                    "type": "string"
+                  },
+                  "description": {
+                    "default": "payment",
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "reference": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "source": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination",
+                  "amount"
+                ],
+                "type": "object"
+              },
+              "name": "pay",
+              "schema_sha256": "d28b92b68d73853ef75b5df8510af062434d2022bf70f559c287cc9148a1c77d"
+            },
+            {
+              "description": "Refund a transaction.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "transaction_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "transaction_id"
+                ],
+                "type": "object"
+              },
+              "name": "refund_transaction",
+              "schema_sha256": "74c1b4db827cf7dd8e86ca524c4b0bd3391cb359011a6e8ffbacc59db823e377"
+            },
+            {
+              "description": "Transfer money between two balances.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "default": "USD",
+                    "type": "string"
+                  },
+                  "description": {
+                    "default": "transfer",
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "reference": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "source": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "destination",
+                  "amount"
+                ],
+                "type": "object"
+              },
+              "name": "transfer",
+              "schema_sha256": "7f9ba4d42563228772243a3406a59e5d049079995655ffa3679b46247167fcbd"
+            },
+            {
+              "description": "Withdraw money from a balance. Uses @world as destination (funds out).",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  },
+                  "currency": {
+                    "default": "USD",
+                    "type": "string"
+                  },
+                  "description": {
+                    "default": "withdrawal",
+                    "type": "string"
+                  },
+                  "reference": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "source": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "amount"
+                ],
+                "type": "object"
+              },
+              "name": "withdraw",
+              "schema_sha256": "37dd2076c59cb431ad314db68771937283cdb59ef12fc8716d68d16fdd0ee1b4"
+            }
+          ]
+        }
+      ],
+      "backend": "Blnk",
+      "evidence_dir": "tmp/initializer_contract_frozen_20260711/item-smoke-banking-1783745219",
+      "initializer_mcp": [
+        {
+          "server_name": "banking-injection",
+          "tools": [
+            {
+              "description": "Seed a ledger with two balances.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "ledger_name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ledger_name",
+                  "amount"
+                ],
+                "type": "object"
+              },
+              "name": "seed_balance_pair",
+              "schema_sha256": "de67de2e9966641708be9dc0a964e24a9ca4ed1d6f394790c4a65ff9239bbeb5"
+            },
+            {
+              "description": "Record a pending transfer request.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "exclusiveMinimum": 0,
+                    "type": "number"
+                  },
+                  "approval_record": {
+                    "type": "string"
+                  },
+                  "approval_status": {
+                    "type": "string"
+                  },
+                  "authorization_record": {
+                    "type": "string"
+                  },
+                  "authorization_status": {
+                    "type": "string"
+                  },
+                  "checkpoint_record": {
+                    "type": "string"
+                  },
+                  "checkpoint_status": {
+                    "type": "string"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "destination_record": {
+                    "type": "string"
+                  },
+                  "destination_status": {
+                    "type": "string"
+                  },
+                  "override_record": {
+                    "type": "string"
+                  },
+                  "override_status": {
+                    "type": "string"
+                  },
+                  "queue_note": {
+                    "type": "string"
+                  },
+                  "queue_status": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "reference": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "reference",
+                  "source",
+                  "destination",
+                  "amount"
+                ],
+                "type": "object"
+              },
+              "name": "seed_pending_transfer",
+              "schema_sha256": "8460e34512cc6ba7f7e8c6eb73df957df16d1825d76b3d246cecc675b7c7b0dd"
+            }
+          ]
+        }
+      ],
+      "status": "VERIFIED"
+    },
+    "browser": {
+      "agent_mcp": [
+        {
+          "server_name": "browser",
+          "tools": [
+            {
+              "description": "Autofill payment form with saved credit card",
+              "inputSchema": {
+                "properties": {
+                  "card_index": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": 1,
+                    "description": "Index of saved card to use (1-based, defaults to first card)"
+                  },
+                  "cvv_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for CVV field"
+                  },
+                  "expiry_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for expiry date field"
+                  },
+                  "month_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for expiry month field (if separate)"
+                  },
+                  "name_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for cardholder name field"
+                  },
+                  "number_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for card number field"
+                  },
+                  "year_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for expiry year field (if separate)"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "browser_autofill_credit_card",
+              "schema_sha256": "b796291b7186950884fed808f5e89e9c57d48ca2af119a269520ac1401658e89"
+            },
+            {
+              "description": "Autofill login form with saved credentials",
+              "inputSchema": {
+                "properties": {
+                  "password_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for password field"
+                  },
+                  "submit": {
+                    "default": false,
+                    "description": "Whether to submit the form after filling",
+                    "type": "boolean"
+                  },
+                  "username_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Selector for username/email field"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "browser_autofill_password",
+              "schema_sha256": "adcf83260757db49d5a849b4ca606d3fe77d078dcde8e7817861853f520de493"
+            },
+            {
+              "description": "Perform click on a web page",
+              "inputSchema": {
+                "properties": {
+                  "button": {
+                    "default": "left",
+                    "description": "Button to click, defaults to left",
+                    "type": "string"
+                  },
+                  "doubleClick": {
+                    "default": false,
+                    "description": "Whether to perform a double click instead of a single click",
+                    "type": "boolean"
+                  },
+                  "force": {
+                    "default": false,
+                    "description": "Whether to force the click even if element is not visible",
+                    "type": "boolean"
+                  },
+                  "modifiers": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Modifier keys to press"
+                  },
+                  "ref": {
+                    "description": "Exact target element reference from the page snapshot",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ref"
+                ],
+                "type": "object"
+              },
+              "name": "browser_click",
+              "schema_sha256": "406f39cf1dd003d119f678cbd99dc3eeafafa25ec8472a2d63284b9b8b973913"
+            },
+            {
+              "description": "Close the page",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "browser_close",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "Delete a saved credit card",
+              "inputSchema": {
+                "properties": {
+                  "number": {
+                    "description": "Credit card number to delete",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "number"
+                ],
+                "type": "object"
+              },
+              "name": "browser_delete_credit_card",
+              "schema_sha256": "eb47a26c17ebed74e76a34dbfb15be5a7aa828f83054d3c8af19e89a32e9f949"
+            },
+            {
+              "description": "Delete a saved password",
+              "inputSchema": {
+                "properties": {
+                  "url_pattern": {
+                    "description": "URL pattern of the password to delete",
+                    "type": "string"
+                  },
+                  "username": {
+                    "description": "Username of the password to delete",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url_pattern",
+                  "username"
+                ],
+                "type": "object"
+              },
+              "name": "browser_delete_password",
+              "schema_sha256": "5aa263626204cea3bc0e089a3f301dd2b1fffd50510a415bc7396d9dd7f9d9cf"
+            },
+            {
+              "description": "Perform drag and drop between two elements",
+              "inputSchema": {
+                "properties": {
+                  "endRef": {
+                    "description": "Exact target element reference from the page snapshot",
+                    "type": "string"
+                  },
+                  "startRef": {
+                    "description": "Exact source element reference from the page snapshot",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "startRef",
+                  "endRef"
+                ],
+                "type": "object"
+              },
+              "name": "browser_drag",
+              "schema_sha256": "378d6e22dda9ef7339b5e5a0ca60b5827a95bfa1fa3704c5ad8ba170f53dd0f2"
+            },
+            {
+              "description": "Get the browsing history",
+              "inputSchema": {
+                "properties": {
+                  "limit": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": 50,
+                    "description": "Optional limit on number of history entries to return (most recent first)"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "browser_get_history",
+              "schema_sha256": "7151cc18df31175e7fc309a815c9c932be6624aa7d8f9b34547832b01117ea28"
+            },
+            {
+              "description": "Hover over element on page",
+              "inputSchema": {
+                "properties": {
+                  "ref": {
+                    "description": "Exact target element reference from the page snapshot",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ref"
+                ],
+                "type": "object"
+              },
+              "name": "browser_hover",
+              "schema_sha256": "bd48eacb9b2229ceb7e5b71292e295200002f811f06a1bad401012884aba9925"
+            },
+            {
+              "description": "List all saved credit cards (numbers are partially masked)",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "browser_list_saved_credit_cards",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "List all saved passwords (passwords are masked)",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "browser_list_saved_passwords",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "Click left mouse button at a given position",
+              "inputSchema": {
+                "properties": {
+                  "x": {
+                    "description": "X coordinate",
+                    "type": "integer"
+                  },
+                  "y": {
+                    "description": "Y coordinate",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "type": "object"
+              },
+              "name": "browser_mouse_click_xy",
+              "schema_sha256": "80277d3e01ee3f6535ddf100dbb22048d8d5693cdde0d5827f5bbebeeace0c98"
+            },
+            {
+              "description": "Drag left mouse button to a given position",
+              "inputSchema": {
+                "properties": {
+                  "endX": {
+                    "description": "End X coordinate",
+                    "type": "integer"
+                  },
+                  "endY": {
+                    "description": "End Y coordinate",
+                    "type": "integer"
+                  },
+                  "startX": {
+                    "description": "Start X coordinate",
+                    "type": "integer"
+                  },
+                  "startY": {
+                    "description": "Start Y coordinate",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "startX",
+                  "startY",
+                  "endX",
+                  "endY"
+                ],
+                "type": "object"
+              },
+              "name": "browser_mouse_drag_xy",
+              "schema_sha256": "ad3c73d69f47381b1263fcfee00eb1824e4f6478f3d923897281cc07af8a910c"
+            },
+            {
+              "description": "Move mouse to a given position",
+              "inputSchema": {
+                "properties": {
+                  "x": {
+                    "description": "X coordinate",
+                    "type": "integer"
+                  },
+                  "y": {
+                    "description": "Y coordinate",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "type": "object"
+              },
+              "name": "browser_mouse_move_xy",
+              "schema_sha256": "80277d3e01ee3f6535ddf100dbb22048d8d5693cdde0d5827f5bbebeeace0c98"
+            },
+            {
+              "description": "Navigate to a URL",
+              "inputSchema": {
+                "properties": {
+                  "url": {
+                    "description": "The URL to navigate to",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "type": "object"
+              },
+              "name": "browser_navigate",
+              "schema_sha256": "f25e23e434e6019ddeb733826a933e27e4369be7cf3133cd25963f3e11d1821a"
+            },
+            {
+              "description": "Go back to the previous page",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "browser_navigate_back",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "Open a URL from browsing history by its ID",
+              "inputSchema": {
+                "properties": {
+                  "history_id": {
+                    "description": "The history item ID (number shown in browser_get_history)",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "history_id"
+                ],
+                "type": "object"
+              },
+              "name": "browser_open_history",
+              "schema_sha256": "abf52ee702269ebae56e48dacfcc828395392f1889ab4bcc7dc8a6df5463cff7"
+            },
+            {
+              "description": "Press a key on the keyboard",
+              "inputSchema": {
+                "properties": {
+                  "key": {
+                    "description": "Name of the key to press or a character to generate, such as ArrowLeft or a",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key"
+                ],
+                "type": "object"
+              },
+              "name": "browser_press_key",
+              "schema_sha256": "bd80177bea7fe3be622c07197c723051edc7453ceb5b261f7705b7d6ae69bb86"
+            },
+            {
+              "description": "Resize the browser window",
+              "inputSchema": {
+                "properties": {
+                  "height": {
+                    "description": "Height of the browser window",
+                    "type": "integer"
+                  },
+                  "width": {
+                    "description": "Width of the browser window",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "width",
+                  "height"
+                ],
+                "type": "object"
+              },
+              "name": "browser_resize",
+              "schema_sha256": "cd34793d2529d37500402527746d47c4df46fcfa9acc4a9331fdc9949e6fc84a"
+            },
+            {
+              "description": "Save credit card information for autofill",
+              "inputSchema": {
+                "properties": {
+                  "cvv": {
+                    "description": "CVV/Security code",
+                    "type": "string"
+                  },
+                  "expiry_month": {
+                    "description": "Expiry month (MM)",
+                    "type": "string"
+                  },
+                  "expiry_year": {
+                    "description": "Expiry year (YYYY or YY)",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Cardholder name",
+                    "type": "string"
+                  },
+                  "number": {
+                    "description": "Credit card number",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "number",
+                  "expiry_month",
+                  "expiry_year",
+                  "cvv"
+                ],
+                "type": "object"
+              },
+              "name": "browser_save_credit_card",
+              "schema_sha256": "5bc64c18c0cf1ad860b469257838257a5e477da45b51409799398581f26a9fe6"
+            },
+            {
+              "description": "Save login credentials for autofill",
+              "inputSchema": {
+                "properties": {
+                  "password": {
+                    "description": "Password",
+                    "type": "string"
+                  },
+                  "url_pattern": {
+                    "description": "URL or URL pattern (e.g., 'example.com' or 'https://example.com/login')",
+                    "type": "string"
+                  },
+                  "username": {
+                    "description": "Username or email",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url_pattern",
+                  "username",
+                  "password"
+                ],
+                "type": "object"
+              },
+              "name": "browser_save_password",
+              "schema_sha256": "a6c3de81f5b244df87e77050416f78ea98761bc593ef0ad4e16169c1959b787c"
+            },
+            {
+              "description": "Select an option in a dropdown",
+              "inputSchema": {
+                "properties": {
+                  "ref": {
+                    "description": "Exact target element reference from the page snapshot",
+                    "type": "string"
+                  },
+                  "values": {
+                    "description": "Array of values to select in the dropdown",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "ref",
+                  "values"
+                ],
+                "type": "object"
+              },
+              "name": "browser_select_option",
+              "schema_sha256": "590869ba57f38268676d02496dd1418f134949284bad029e5e34c53146d9868d"
+            },
+            {
+              "description": "Capture accessibility snapshot of the current page, this is better than screenshot",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "browser_snapshot",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "List, create, close, or select a browser tab",
+              "inputSchema": {
+                "properties": {
+                  "action": {
+                    "description": "Operation to perform (list, new, close, select)",
+                    "type": "string"
+                  },
+                  "index": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Tab index, used for close/select"
+                  }
+                },
+                "required": [
+                  "action"
+                ],
+                "type": "object"
+              },
+              "name": "browser_tabs",
+              "schema_sha256": "c014ceea41af46934eee27325894e3a1aae3e166f61a802e7a0a525fdbae2b28"
+            },
+            {
+              "description": "Take a screenshot of the current page",
+              "inputSchema": {
+                "properties": {
+                  "fullPage": {
+                    "default": false,
+                    "description": "When true, takes a screenshot of the full scrollable page",
+                    "type": "boolean"
+                  },
+                  "ref": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Exact target element reference from the page snapshot (for element screenshot)"
+                  },
+                  "type": {
+                    "default": "png",
+                    "description": "Image format for the screenshot (png or jpeg)",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "browser_take_screenshot",
+              "schema_sha256": "15491837272d240237ca773ec0e33a77cd8deac86a922418892c9b1ba69baa26"
+            },
+            {
+              "description": "Type text into editable element",
+              "inputSchema": {
+                "properties": {
+                  "ref": {
+                    "description": "Exact target element reference from the page snapshot",
+                    "type": "string"
+                  },
+                  "slowly": {
+                    "default": false,
+                    "description": "Whether to type one character at a time",
+                    "type": "boolean"
+                  },
+                  "submit": {
+                    "default": false,
+                    "description": "Whether to submit entered text (press Enter after)",
+                    "type": "boolean"
+                  },
+                  "text": {
+                    "description": "Text to type into the element",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ref",
+                  "text"
+                ],
+                "type": "object"
+              },
+              "name": "browser_type",
+              "schema_sha256": "f672002bf6be8651f813b3a434a29e99ecf00c09e64adfeb76ea1a4db3d989ff"
+            },
+            {
+              "description": "Wait for text to appear or disappear or a specified time to pass",
+              "inputSchema": {
+                "properties": {
+                  "text": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "The text to wait for"
+                  },
+                  "textGone": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "The text to wait for to disappear"
+                  },
+                  "time": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "The time to wait in seconds"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "browser_wait_for",
+              "schema_sha256": "3551fb06a328db51466165c5bec13b6ab69992bce9a095ecef1bef63652ae94d"
+            }
+          ]
+        }
+      ],
+      "backend": "Local Playwright Browser",
+      "evidence_dir": "tmp/initializer_contract_frozen_20260711/item-smoke-browser-1783745183",
+      "initializer_mcp": [
+        {
+          "server_name": "browser-injection",
+          "tools": [
+            {
+              "description": "Set the HTML served by the local mutable website.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "html": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "html"
+                ],
+                "type": "object"
+              },
+              "name": "update_html_content",
+              "schema_sha256": "fc064e354f6d254b3c584967037a4ff9a6f117edfe9a54b685eee4ed45f17254"
+            }
+          ]
+        }
+      ],
+      "status": "VERIFIED"
+    },
+    "external_files": {
+      "agent_mcp": [
+        {
+          "server_name": "external_files",
+          "tools": [
+            {
+              "description": "Check whether a file or directory exists and return lightweight metadata.",
+              "inputSchema": {
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "type": "object"
+              },
+              "name": "check_path",
+              "schema_sha256": "923b083c9bcab2e3d3e07c7d9b4401688ad9f3d5e2c2f0c48fcd43052bdcb71b"
+            },
+            {
+              "description": "Return a structured directory tree under the external file-store root.",
+              "inputSchema": {
+                "properties": {
+                  "max_depth": {
+                    "maximum": 6,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "directory_tree",
+              "schema_sha256": "3a1f3b411d14d266730a4a0417edebc32a446b85276cde9ee1abe54448c328cf"
+            },
+            {
+              "description": "Return the external file store cwd, path contract, and a shallow manifest of business files.",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "get_file_store_manifest",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "List a directory in the external file store. Relative paths resolve from /srv/external-files.",
+              "inputSchema": {
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "list_directory",
+              "schema_sha256": "53582d9d7229826e75097ac478787ca403c94ce74e4611571be1b03c706952cc"
+            },
+            {
+              "description": "Read a file in the external file store. Relative paths resolve from /srv/external-files.",
+              "inputSchema": {
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "type": "object"
+              },
+              "name": "read_file",
+              "schema_sha256": "923b083c9bcab2e3d3e07c7d9b4401688ad9f3d5e2c2f0c48fcd43052bdcb71b"
+            },
+            {
+              "description": "Read multiple external file-store files in one service call.",
+              "inputSchema": {
+                "properties": {
+                  "paths": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "paths"
+                ],
+                "type": "object"
+              },
+              "name": "read_multiple_files",
+              "schema_sha256": "8083a18250115d0c5d2b39626ab50f7ed5f6fd60aa1b258f7313f96325ba6ba4"
+            },
+            {
+              "description": "Write a file in the external file store, creating parent directories as needed.",
+              "inputSchema": {
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "content"
+                ],
+                "type": "object"
+              },
+              "name": "write_file",
+              "schema_sha256": "3f4ea9aef3ff7c58f773a492498a98ea9200ac0ca575dcabae7f7c5bfe0f472a"
+            }
+          ]
+        }
+      ],
+      "backend": "OS-filesystem service",
+      "evidence_dir": "tmp/initializer_contract_frozen_external_files_20260711/item-smoke-os_filesystem-1783745316",
+      "initializer_mcp": [
+        {
+          "server_name": "external_files-injection",
+          "tools": [
+            {
+              "description": "Append content to a file in the external file store.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  },
+                  "file_path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file_path",
+                  "content"
+                ],
+                "type": "object"
+              },
+              "name": "inject_append",
+              "schema_sha256": "66d7b818318329972cffcb0dc862f26a98eaaa3d8e69771ce863fcbc3d3f498f"
+            },
+            {
+              "description": "Add a file to the external file store.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  },
+                  "file_path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file_path",
+                  "content"
+                ],
+                "type": "object"
+              },
+              "name": "inject_file",
+              "schema_sha256": "66d7b818318329972cffcb0dc862f26a98eaaa3d8e69771ce863fcbc3d3f498f"
+            }
+          ]
+        }
+      ],
+      "status": "VERIFIED"
+    },
+    "gmail": {
+      "agent_mcp": [
+        {
+          "server_name": "gmail",
+          "tools": [
+            {
+              "description": "Delete multiple Gmail messages.",
+              "inputSchema": {
+                "properties": {
+                  "ids": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "ids"
+                ],
+                "type": "object"
+              },
+              "name": "batch_delete_messages",
+              "schema_sha256": "0eb0c2be01ed63b7beefeb9abc2040e0b9b855ebdb0bfb8a66599dc11e956422"
+            },
+            {
+              "description": "Delete all visible Gmail messages.",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "delete_all_messages",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "Move a message to trash.",
+              "inputSchema": {
+                "properties": {
+                  "message_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message_id"
+                ],
+                "type": "object"
+              },
+              "name": "delete_message",
+              "schema_sha256": "e4b52f4bc04403a869184a1de8c6c0c9922b1e16cc1657a8c79c30f1536719a1"
+            },
+            {
+              "description": "Forward an existing message to new recipients.",
+              "inputSchema": {
+                "properties": {
+                  "body": {
+                    "type": "string"
+                  },
+                  "message_id": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message_id",
+                  "to"
+                ],
+                "type": "object"
+              },
+              "name": "forward_message",
+              "schema_sha256": "86c12085878afa996652674191997dca3a18d5421cbfab060ac85ce5401897be"
+            },
+            {
+              "description": "Show the current mail account and connection status.",
+              "inputSchema": {
+                "properties": {},
+                "type": "object"
+              },
+              "name": "get_auth_context",
+              "schema_sha256": "efddc7bd8bbcef73a14eb1ace1ffdaec81e518ef1e13c1e9271d0b8acb694a49"
+            },
+            {
+              "description": "Get a single Gmail message by id.",
+              "inputSchema": {
+                "properties": {
+                  "message_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message_id"
+                ],
+                "type": "object"
+              },
+              "name": "get_message",
+              "schema_sha256": "e4b52f4bc04403a869184a1de8c6c0c9922b1e16cc1657a8c79c30f1536719a1"
+            },
+            {
+              "description": "List staged or message attachments.",
+              "inputSchema": {
+                "properties": {
+                  "message_id": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "list_attachments",
+              "schema_sha256": "a2be852c2d67b03cd7762cae586b869a424277f6f1864afab392358b908a3348"
+            },
+            {
+              "description": "List messages from inbox, sent, or trash.",
+              "inputSchema": {
+                "properties": {
+                  "folder": {
+                    "type": "string"
+                  },
+                  "limit": {
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "name": "list_messages",
+              "schema_sha256": "c2e4b363d99903bcb777a1d81bddb4c940a1567b46e14f04facdee150670344c"
+            },
+            {
+              "description": "Read a staged attachment or a Mailpit message attachment by id.",
+              "inputSchema": {
+                "properties": {
+                  "attachment_id": {
+                    "type": "string"
+                  },
+                  "message_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "attachment_id"
+                ],
+                "type": "object"
+              },
+              "name": "read_attachment",
+              "schema_sha256": "fb22b9288fed18c7bdc0df08372f1902617b3a805352c47521a866265149856e"
+            },
+            {
+              "description": "Reply to an existing Gmail message while preserving lightweight thread context.",
+              "inputSchema": {
+                "properties": {
+                  "attachments": {
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "body": {
+                    "type": "string"
+                  },
+                  "message_id": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message_id",
+                  "body"
+                ],
+                "type": "object"
+              },
+              "name": "reply",
+              "schema_sha256": "ea32dde0d65b427a47165bc28d9923a99781bfae08a51cc28429c2bbb28d58b9"
+            },
+            {
+              "description": "Search Gmail messages by text across inbox and sent.",
+              "inputSchema": {
+                "properties": {
+                  "folder": {
+                    "type": "string"
+                  },
+                  "limit": {
+                    "type": "integer"
+                  },
+                  "query": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query"
+                ],
+                "type": "object"
+              },
+              "name": "search_messages",
+              "schema_sha256": "bdc7bdcc9e2fd52002ce92c7e66470e8241f28b0f0dd33ed3eb82cd0c27c0c2e"
+            },
+            {
+              "description": "Send an email from the current mail account.",
+              "inputSchema": {
+                "properties": {
+                  "attachments": {
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "bcc": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  },
+                  "cc": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "to",
+                  "subject",
+                  "body"
+                ],
+                "type": "object"
+              },
+              "name": "send_email",
+              "schema_sha256": "c7bd72cdf11f68b7a197acbfd16b409b45daae2a1ecd23b3ac79f600aaba3e88"
+            },
+            {
+              "description": "Stage a base64 attachment for later send_email use.",
+              "inputSchema": {
+                "properties": {
+                  "content_type": {
+                    "type": "string"
+                  },
+                  "data_base64": {
+                    "type": "string"
+                  },
+                  "filename": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "filename",
+                  "data_base64"
+                ],
+                "type": "object"
+              },
+              "name": "upload_attachment",
+              "schema_sha256": "ae8f4aca5d5bde6b247460eed38f072dfef59b6b97965b7bd9f80d20ea18ecf5"
+            }
+          ]
+        }
+      ],
+      "backend": "Mailpit Gmail",
+      "evidence_dir": "tmp/initializer_contract_frozen_20260711/item-smoke-gmail-1783745152",
+      "initializer_mcp": [
+        {
+          "server_name": "gmail-injection",
+          "tools": [
+            {
+              "description": "Add an incoming email to the inbox.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "attachments": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "content_type": {
+                          "type": "string"
+                        },
+                        "data_base64": {
+                          "type": "string"
+                        },
+                        "filename": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "filename",
+                        "data_base64"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "body": {
+                    "type": "string"
+                  },
+                  "from_email": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "to_email": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "from_email",
+                  "to_email",
+                  "subject",
+                  "body"
+                ],
+                "type": "object"
+              },
+              "name": "inject_email",
+              "schema_sha256": "7f9f8e03143ba1b27fe3bafea70262625a4945c0832fcd68df47e31429da3326"
+            }
+          ]
+        }
+      ],
+      "status": "VERIFIED"
+    }
+  },
+  "source": "live MCP tools/list plus initializer-to-agent-read-back smoke"
+}

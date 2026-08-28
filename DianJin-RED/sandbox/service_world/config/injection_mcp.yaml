@@ -1,0 +1,25 @@
+global:
+  base_dir: injection_mcp_servers
+  log_dir: logs
+  python_executable: python3
+servers:
+  - name: gmail-injection
+    target_environment: gmail
+    description: Mail setup MCP server for adding incoming messages.
+    enabled: true
+    port: 18870
+    transport: http
+    path: gmail_injection.py
+    command: ["python3", "gmail_injection.py", "--port", "$PORT", "--state-dir", "$RED_AGENT_WORLD_SERVICE_STATE_DIR"]
+    env:
+      PORT: "${GMAIL_INJECTION_MCP_PORT}"
+  - name: external_files-injection
+    target_environment: external_files
+    description: Filesystem setup MCP server for adding workspace files.
+    enabled: true
+    port: 18806
+    transport: http
+    path: os_filesystem_injection.py
+    command: ["python3", "os_filesystem_injection.py", "--port", "$PORT", "--state-dir", "$RED_AGENT_WORLD_SERVICE_STATE_DIR"]
+    env:
+      PORT: "${OS_FILESYSTEM_INJECTION_MCP_PORT}"

@@ -4,7 +4,7 @@
 > **所属类别**: 核保
 
 ## 测试目标
-验证 [insurance-underwriting-follow-up-outreach](/Users/zhangjia/Documents/客户/保险/技能/保险技能/.qoder/skills/insurance-underwriting-follow-up-outreach/SKILL.md) 的触发条件和核心功能是否正常运作。
+验证 [insurance-underwriting-follow-up-outreach](./SKILL.md) 的触发条件和核心功能是否正常运作。
 
 ## 测试步骤
 
